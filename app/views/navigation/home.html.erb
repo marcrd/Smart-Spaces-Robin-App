@@ -1,0 +1,3 @@
+json = Net::HTTP.get_response("api.robinpowered.com", "/v1.0/device-manifests").body
+puts json
+end
