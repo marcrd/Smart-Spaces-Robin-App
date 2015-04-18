@@ -6,9 +6,9 @@ what room you're in
 
 ## Ruby and Rails Versions: 
 
-Ruby 2.1.5
+- Ruby 2.1.5
 
-Rails 4.2.1
+- Rails 4.2.1
 
 ### Setup
 
@@ -18,9 +18,10 @@ You can deploy the server localhost or use Unicorn to build it out quickly. Run 
 directory to spawn a Unicorn server
 
 ### Setting up the controller
-
+```
 excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => 
 {'Authorization' => 'Auth Token'})
+```
 
 This is the command for GET requests in the controller. Replace 'Auth Token' with your Robin Auth Token and then you can set $spaceid to the ID of the beacon you are using. You can also use a loop to loop through all instances of all the beacons in the area 
 
