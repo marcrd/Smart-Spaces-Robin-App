@@ -1,28 +1,30 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a smarthome app. This uses the Robin API (https://robinpowered.com/developers) and beacons to create a smart home app in
+Rails. The app uses REST routing to retrieve if you're within a specific room and create specific aware functions based on
+what room you're in
 
-Things you may want to cover:
+### Ruby and Rails Versions: 
+Ruby 2.1.5
+Rails 
 
-* Ruby version
+### Setup
 
-* System dependencies
+Bundle Install the gems. Excon is used for the routing, a wonderful gem by Wesley Beary (@geemus)
 
-* Configuration
+You can deploy the server localhost or use Unicorn to build it out quickly. Run "bundle exec foreman start" in the root 
+directory to spawn a Unicorn server
 
-* Database creation
+### Setting up the controller
 
-* Database initialization
+excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => 
+{'Authorization' => 'Auth Token'})
 
-* How to run the test suite
+This is the command for GET requests in the controller. Replace 'Auth Token' with your Robin Auth Token and then you can set $spaceid to the ID of the beacon you are using. You can also use a loop to loop through all instances of all the beacons in the area 
 
-* Services (job queues, cache servers, search engines, etc.)
+### Calling the variables
 
-* Deployment instructions
+You can either set the variables as a string (as its setup now) and call it within your erb template using '<li><\%= @optionOne \%></li>'  
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+You can also render the JSON in your controller directly if you want to use a JSON template. You can use 'render json: 
+@optionOne'
