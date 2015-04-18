@@ -5,8 +5,10 @@ Rails. The app uses REST routing to retrieve if you're within a specific room an
 what room you're in
 
 ### Ruby and Rails Versions: 
+
 Ruby 2.1.5
-Rails 
+
+Rails 4.2.1
 
 ### Setup
 
