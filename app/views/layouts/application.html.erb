@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Web</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>Web</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 <body>
 
- <div class="span12">
-   <div class="header">
-      <div class="row text-center"><%= image_tag("cloud_logo.png", :alt => "logo", :class => "logo_image") %></div>
-      <div class="row text-center"><span>SIDEKICK</span></div>
-   </div>
- </div>
+       <div class="span12">
+         <div class="header">
+            <div class="row text-center"><%= image_tag("cloud_logo.png", :alt => "logo", :class => "logo_image") %></div>
+            <div class="row text-center"><span>SMART SPACES</span></div>
+          </div>
+        </div>
 
+        <div class="container">
+          <div class="head_text">
 
-   
+           <!-- How to call the string variables from the controller -->
+           <%= @room%> 
+
+          </div>
+            <ul class="options"> 
+
+              <!-- Other Variables from the controller -->
+              <li><%= @optionOne %></li>  
+              <li><%= @optionTwo %></li>
+              <li><%= @optionThree %></li>
+            </ul>
+
+          <span id="more"> See more... </span>
+            <div class="head_text">
+              <span> Space Status </span>
+            </div>
+          <ul class="spaces">
+                <li>Heat: Comfortable</li>
+                <li>Lights: On</li>
+            </ul>
+        </div>
+
+           
       
 
 

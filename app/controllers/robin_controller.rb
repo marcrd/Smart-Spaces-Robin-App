@@ -1,130 +1,57 @@
- #require 'excon'
- require 'json'
+# Don't remove this
+require 'json'
 
 class RobinController < ApplicationController 
 
-  respond_to :json, :xml
-  include ActionController::Live
+  respond_to :json, :xml 
+  include ActionController::Live # This is included if you want to create long polling 
   def index
 
-  first_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/767/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  second_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/763/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  third_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/755/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  fourth_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/758/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  fifth_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/759/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  sixth_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/764/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  seventh_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/765/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
-  eighth_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/767/presence', :persistent => true, :headers => {'Authorization' => 'Access-Token BSBfVA8cX8PEUuzEDWdSZLfCHBxJP3eStIa01ka9PK9CHQyVAbM94j051g0epEtY6sLhe9Tv8Cw7z5MPzYNlQoUOiM8cqx7wVnyTZXFm3N9Ecs73CYmuavp8buPSW3sK'})
+    
 
 
-  @robin_json_one = first_one.body
-  @robin_json_two = second_one.body
-  @robin_json_three = third_one.body
-  @robin_json_four = fourth_one.body
-  @robin_json_five = fifth_one.body
-  @robin_json_sixth = sixth_one.body
-  @robin_json_seventh = seventh_one.body
-  @robin_json_eight = eighth_one.body
 
+  # Replace $spaceid with the space ID you'd like to use, and the auth token with your auth token
+  excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => {'Authorization' => 'Auth Token'})
+  excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => {'Authorization' => 'Auth Token'})
+
+
+  # Call a JSON variable so we can parse it
+  @robin_json_one = excon_one.body
+  @robin_json_one = excon_two.body
+  
+  # Actually parse the the variable from JSON into a string
   @data_one = JSON.parse(@robin_json_one);
   @data_two = JSON.parse(@robin_json_two);
-  @data_three = JSON.parse(@robin_json_three);
-  @data_four = JSON.parse(@robin_json_four);
-  @data_five = JSON.parse(@robin_json_five);
-  @data_six = JSON.parse(@robin_json_sixth);
-  @data_seven = JSON.parse(@robin_json_seventh);
-  @data_eight = JSON.parse(@robin_json_eight);
+ 
 
-# @data= JSON.parse(@robin_json);
-#  render :json => @data['data']['']
+# Start off with first set of Data for the beacon
 presence = @data_one['data']
 
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Kitchen'
 
+# Set these variables to what you want. I just put in random variables
+presence.each do |p|
+  if p['user']['name'] == 'user_name'
+      @room = 'Kitchen'
+      @optionOne = 'Food Network'
+      @optionTwo = 'Recipe App'
+      @optionThree = 'Wine Mixer App'
      
   end
 end
 
+# Example of a second loop with a different presence
 presence = @data_two['data']
 
 presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Living Room'
-
+  if p['user']['name'] == 'user_name'
+      @room = 'Living Room'
+      @optionOne = 'Netflix'
+      @optionTwo = 'XBOX One'
+      @optionThree = 'Wii U'
    
   end
 end
-
-
-presence = @data_three['data']
-
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Mudroom'
-
-  
-  end
-end
-
-
-presence = @data_four['data']
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Bedroom'
-
-  end
-end
-
-presence = @data_five['data']
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Basement'
-
-  end
-end
-
-presence = @data_six['data']
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Attic'
-
-    
-  end
-end
-
-
-presence = @data_seven['data']
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Office'
-
-    
-  end
-end
-
-
-
-presence = @data_eight['data']
-
-presence.each do |p|
-  if p['user']['name'] == 'mrudkows@umass.edu'
-    @hello = 'Play Room'
-
-
-  end
-end
-
-
-
-
-
 
 
 
