@@ -4,7 +4,7 @@ This is a smarthome app. This uses the Robin API (https://robinpowered.com/devel
 Rails. The app uses REST routing to retrieve if you're within a specific room and create specific aware functions based on
 what room you're in
 
-###Ruby and Rails Versions: 
+## Ruby and Rails Versions: 
 
 Ruby 2.1.5
 
