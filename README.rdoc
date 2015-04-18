@@ -4,29 +4,29 @@ This is a smarthome app. This uses the Robin API (https://robinpowered.com/devel
 Rails. The app uses REST routing to retrieve if you're within a specific room and create specific aware functions based on
 what room you're in
 
-## Ruby and Rails Versions: 
+=== Ruby and Rails Versions: 
 
 - Ruby 2.1.5
 
 - Rails 4.2.1
 
-### Setup
+=== Setup
 
 Bundle Install the gems. Excon is used for the routing, a wonderful gem by Wesley Beary (@geemus)
 
 You can deploy the server localhost or use Unicorn to build it out quickly. Run "bundle exec foreman start" in the root 
 directory to spawn a Unicorn server
 
-### Setting up the controller
+=== Setting up the controller
 
-```ruby
+
 excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => 
 {'Authorization' => 'Auth Token'})
-```
+
 
 This is the command for GET requests in the controller. Replace 'Auth Token' with your Robin Auth Token and then you can set $spaceid to the ID of the beacon you are using. You can also use a loop to loop through all instances of all the beacons in the area 
 
-### Calling the variables
+=== Calling the variables
 
 You can either set the variables as a string (as its setup now) and call it within your erb template using '<li><\%= @optionOne \%></li>'  
 
