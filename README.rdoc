@@ -19,7 +19,7 @@ directory to spawn a Unicorn server
 
 ### Setting up the controller
 
-```
+```ruby
 excon_one = Excon.get('https://api.robinpowered.com/v1.0/spaces/$spaceid/presence', :persistent => true, :headers => 
 {'Authorization' => 'Auth Token'})
 ```
